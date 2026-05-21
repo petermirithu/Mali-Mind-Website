@@ -60,7 +60,7 @@ export default function Footer() {
         {/* Bottom */}
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 24, display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: 14 }}>
           <div className="mono-label" style={{ fontSize: 9 }}>
-            © 2026 Mali. All rights reserved. Data sourced from public Kenyan government agencies.
+            © {new Date().getFullYear()} Mali. All rights reserved. Data sourced from public Kenyan government agencies.
           </div>
         </div>
       </div>

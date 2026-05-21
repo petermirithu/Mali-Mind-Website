@@ -110,38 +110,32 @@ export default function Waitlist() {
               </div>
 
               {/* Email input */}
-              <div style={{
-                background: 'rgba(255,255,255,0.03)',
+              <div className="waitlist-form" style={{
                 border: `1px solid ${error ? 'rgba(214,40,40,0.4)' : 'rgba(255,255,255,0.1)'}`,
-                borderRadius: 100,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
-                padding: '5px 5px 5px 18px',
-                maxWidth: 520,
-                marginBottom: 8,
-                transition: 'border-color 0.2s',
               }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 14, color: 'var(--text-muted)' }}>@</span>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={e => { setEmail(e.target.value); setError(''); }}
-                  onKeyDown={e => e.key === 'Enter' && handleSubmit()}
-                  placeholder="your@email.com"
-                  style={{
-                    flex: 1,
-                    background: 'transparent',
-                    border: 'none',
-                    outline: 'none',
-                    color: '#fff',
-                    fontSize: 14,
-                    fontFamily: 'var(--font-body)',
-                    padding: '10px 0',
-                  }}
-                />
-                <button className="btn-primary" onClick={handleSubmit} disabled={loading}
-                  style={{ padding: '12px 22px', fontSize: 13, borderRadius: 100, opacity: loading ? 0.7 : 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, flex: 1, width: '100%' }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 14, color: 'var(--text-muted)' }}>@</span>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={e => { setEmail(e.target.value); setError(''); }}
+                    onKeyDown={e => e.key === 'Enter' && handleSubmit()}
+                    placeholder="your@email.com"
+                    style={{
+                      flex: 1,
+                      background: 'transparent',
+                      border: 'none',
+                      outline: 'none',
+                      color: '#fff',
+                      fontSize: 14,
+                      fontFamily: 'var(--font-body)',
+                      padding: '10px 0',
+                      width: '100%',
+                    }}
+                  />
+                </div>
+                <button className="btn-primary waitlist-btn" onClick={handleSubmit} disabled={loading}
+                  style={{ opacity: loading ? 0.7 : 1 }}>
                   {loading ? 'Joining...' : 'Get Early Access'}
                 </button>
               </div>

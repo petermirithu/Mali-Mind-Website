@@ -12,6 +12,11 @@ const TICKER = [
 ];
 
 function PhoneScreen() {
+  const today = new Date();
+  const day = today.getDate().toString().padStart(2, '0');
+  const month = today.toLocaleString('default', { month: 'short' }).toUpperCase();
+  const year = today.getFullYear();
+
   return (
     <div className="animate-float" style={{
       width: 248,
@@ -42,7 +47,7 @@ function PhoneScreen() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
           <div>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: 14, fontWeight: 700, color: '#fff' }}>Hello, Alex 👋</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'rgba(168,179,199,0.4)', letterSpacing: '0.8px' }}>23 MAY 2025</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 9, color: 'rgba(168,179,199,0.4)', letterSpacing: '0.8px' }}>{day} {month} {year}</div>
           </div>
           <div style={{ width: 26, height: 26, borderRadius: 8, border: '1px solid rgba(11,191,106,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12 }}>🔔</div>
         </div>
