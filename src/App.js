@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
@@ -9,6 +9,10 @@ import Waitlist from './components/Waitlist';
 import Footer from './components/Footer';
 
 export default function App() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div style={{ position: 'relative', minHeight: '100vh' }}>
       <Navbar />
