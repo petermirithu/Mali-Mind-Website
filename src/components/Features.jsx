@@ -132,7 +132,7 @@ export default function Features() {
   useReveal(titleRef);
 
   return (
-    <section id="features" style={{ padding: '120px 0', position: 'relative', background: 'var(--bg-2)' }}>
+    <section id="features" style={{ padding: '140px 0', position: 'relative', background: 'var(--bg-2)' }}>
       <div className="line-grid" style={{ position: 'absolute', inset: 0, opacity: 0.5, pointerEvents: 'none' }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
@@ -158,7 +158,7 @@ export default function Features() {
         </div>
 
         {/* Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 16 }}>
+        <div className="features-grid">
           {FEATURES.map((f, i) => (
             <FeatureCard key={f.title} f={f} delay={Math.min(i + 1, 6)} />
           ))}
