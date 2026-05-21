@@ -77,7 +77,7 @@ function StepRow({ step, idx }) {
   const isEven = idx % 2 === 0;
 
   return (
-    <div ref={ref} className="reveal" style={{
+    <div ref={ref} className="reveal step-row" style={{
       display: 'grid',
       gridTemplateColumns: '1fr 1fr',
       gap: 80,
@@ -86,7 +86,7 @@ function StepRow({ step, idx }) {
       borderBottom: '1px solid rgba(255,255,255,0.05)',
     }}>
       {/* Number side */}
-      <div style={{ order: isEven ? 0 : 1, display: 'flex', justifyContent: isEven ? 'flex-end' : 'flex-start' }}>
+      <div className="step-num-side" style={{ order: isEven ? 0 : 1, display: 'flex', justifyContent: isEven ? 'flex-end' : 'flex-start' }}>
         <div style={{
           width: 180, height: 180,
           border: '1px solid rgba(255,255,255,0.07)',
@@ -125,7 +125,7 @@ function StepRow({ step, idx }) {
       </div>
 
       {/* Content side */}
-      <div style={{ order: isEven ? 1 : 0 }}>
+      <div className="step-content-side" style={{ order: isEven ? 1 : 0 }}>
         <div className="mono-label green" style={{ marginBottom: 12 }}>STEP {step.num}</div>
         <h3 style={{
           fontFamily: 'var(--font-display)',
@@ -149,7 +149,18 @@ function StepRow({ step, idx }) {
 
       <style>{`
         @media (max-width: 768px) {
-          .step-row { grid-template-columns: 1fr !important; }
+          .step-row { 
+            grid-template-columns: 1fr !important; 
+            gap: 40px !important;
+            padding: 40px 0 !important;
+          }
+          .step-num-side { 
+            order: 0 !important; 
+            justify-content: center !important; 
+          }
+          .step-content-side { 
+            order: 1 !important; 
+          }
         }
       `}</style>
     </div>
