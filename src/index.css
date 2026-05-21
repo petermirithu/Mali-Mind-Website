@@ -1,0 +1,316 @@
+/* ── Mali – Economic Intelligence Platform ───────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Brand colors - DO NOT CHANGE */
+  --green: #0B8F4D;
+  --green-bright: #0BBF6A;
+  --gold: #F5B301;
+  --danger: #D62828;
+
+  --neu-bg: #0e1a14;
+  --neu-light: rgba(11, 191, 106, 0.08);
+  --neu-shadow: rgba(0, 0, 0, 0.6);
+
+  /* Derived */
+  --green-glow: rgba(11, 191, 106, 0.18);
+  --green-border: rgba(11, 191, 106, 0.12);
+  --green-surface: rgba(11, 191, 106, 0.06);
+
+  /* Backgrounds - deeper, more terminal */
+  --bg-base: #060c12;
+  --bg-2: #0a0f1a;
+  --bg-3: #121821;
+  --bg-4: #0D1520;
+
+  /* Surfaces - reduced glass opacity */
+  --surface-1: rgba(255, 255, 255, 0.03);
+  --surface-2: rgba(255, 255, 255, 0.05);
+  --surface-3: rgba(255, 255, 255, 0.07);
+
+  /* Glass - reduced blur */
+  --glass-bg: rgba(11, 18, 32, 0.6);
+  --glass-blur: blur(12px);
+  --glass-border: rgba(255, 255, 255, 0.07);
+
+  /* Text */
+  --text-primary: #FFFFFF;
+  --text-secondary: #A8B3C7;
+  --text-muted: rgba(168, 179, 199, 0.45);
+  --text-dim: rgba(168, 179, 199, 0.25);
+
+  /* Typography */
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --radius-md: 100px;    
+
+  /* Transitions */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.25s var(--ease);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(11, 191, 106, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--green-bright);
+}
+
+::selection {
+  background: rgba(11, 191, 106, 0.25);
+  color: #fff;
+}
+
+/* ── Dot grid background pattern ── */
+.dot-grid {
+  background-image: radial-gradient(rgba(11, 191, 106, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.line-grid {
+  background-image:
+    linear-gradient(rgba(11, 191, 106, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 191, 106, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ── Neumorphic Button ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green);
+  border: 1px solid rgba(11, 191, 106, 0.4);
+  border-radius: var(--radius-md);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 0 24px rgba(11, 143, 77, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 12px 24px;
+  text-decoration: none;
+  white-space: nowrap;  
+}
+
+.btn-primary:hover {
+  background: #0DA55A;
+  box-shadow: 0 0 30px rgba(11, 191, 106, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 12px 24px;
+  text-decoration: none;
+  white-space: nowrap;  
+}
+
+.btn-ghost:hover {
+  border-color: rgba(11, 191, 106, 0.3);
+  color: #fff;
+  background: rgba(11, 191, 106, 0.05);
+}
+
+/* ── Mono label ── */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.mono-label.green {
+  color: var(--green-bright);
+  opacity: 0.8;
+}
+
+/* ── Section container ── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── Reveal animation ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Animations ── */
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(0deg);
+  }
+}
+
+@keyframes pulseGreen {
+
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 6px var(--green-bright);
+  }
+
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 2px var(--green-bright);
+  }
+}
+
+@keyframes shimmerText {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scan {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+@keyframes borderPulse {
+
+  0%,
+  100% {
+    border-color: rgba(11, 191, 106, 0.12);
+  }
+
+  50% {
+    border-color: rgba(11, 191, 106, 0.28);
+  }
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green-bright);
+  animation: pulseGreen 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Stagger */
+.d1 {
+  transition-delay: 0.05s !important;
+}
+
+.d2 {
+  transition-delay: 0.12s !important;
+}
+
+.d3 {
+  transition-delay: 0.19s !important;
+}
+
+.d4 {
+  transition-delay: 0.26s !important;
+}
+
+.d5 {
+  transition-delay: 0.33s !important;
+}
+
+.d6 {
+  transition-delay: 0.40s !important;
+}
