@@ -1,13 +1,13 @@
-# Mali Mind Website
+# Mali Website
 
-![Mali Mind Landing Page](public/landingpage.png)
+![Mali Landing Page](public/landingpage.png)
 
-Mali Mind is a live economic signal platform designed specifically for Kenyans. It tracks crucial economic indicators—such as fuel prices, forex rates (USD/KES), food basket costs, inflation, and electricity tariffs—in real time. The platform leverages AI to analyze these data points and provide personalized insights, explaining exactly how macroeconomic changes impact your wallet, business, and daily decisions.
+Mali is a live economic signal platform designed specifically for Kenyans. It tracks crucial economic indicators—such as fuel prices, forex rates (USD/KES), food basket costs, inflation, and electricity tariffs—in real time. The platform leverages AI to analyze these data points and provide personalized insights, explaining exactly how macroeconomic changes impact your wallet, business, and daily decisions.
 
 ## 🚀 Features
 
 - **Real-Time Economic Ticker:** Live updates on essential indicators including Super Petrol, Diesel, USD/KES exchange rates, and inflation figures.
-- **AI-Powered Insights (Ask Mali):** Understand the "why" behind the numbers. Mali Mind translates raw economic data into actionable, easy-to-understand advice for personal budgeting and business planning.
+- **AI-Powered Insights (Ask Mali):** Understand the "why" behind the numbers. Mali translates raw economic data into actionable, easy-to-understand advice for personal budgeting and business planning.
 - **Comprehensive Tracking:** Monitors over 25 live indicators across 47 counties.
 - **Interactive Dashboard UI:** Features a sleek, modern interface with dynamic animations to visualize data intuitively.
 - **Responsive Design:** Fully functional and visually appealing across both desktop and mobile devices.
