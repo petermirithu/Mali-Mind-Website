@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './assets/logo.png';
 import landingScreen from './assets/Landing Screen.png';
 import signInScreen from './assets/SignIn Screen.png';
@@ -9,118 +9,74 @@ import askMaliScreen from './assets/Chat Screen.png';
 
 const ANDROID_DOWNLOAD_URL = 'https://maliassets.blob.core.windows.net/maliapks/Mali_Android_APK_v1_0_0.apk.zip';
 
-const heroScreens = [
-  { image: homeScreen, className: 'hero-device hero-device-main', alt: 'Mali home screen showing cost of living pulse and key indicators' },
-  { image: impactScreen, className: 'hero-device hero-device-side hero-device-left', alt: 'Mali impact screen showing spending impact and profile cards' },
-  { image: feedScreen, className: 'hero-device hero-device-side hero-device-right', alt: 'Mali feed screen showing live market and fuel updates' },
-];
-
-const featureCards = [
+const features = [
   {
-    eyebrow: 'Pulse',
-    title: 'Read the week in seconds.',
-    body: 'Open Mali and see what changed across fuel, forex, food and inflation before those shifts hit your wallet.',
+    number: '01',
+    name: 'Pulse',
+    title: 'Read the week in seconds',
+    body: 'Open Mali and instantly see what changed across fuel, forex, food and inflation — before those shifts reach your wallet.',
   },
   {
-    eyebrow: 'Impact',
-    title: 'Make it personal.',
-    body: 'Profiles and breakdowns turn national economic moves into your household, commute, rent and grocery reality.',
+    number: '02',
+    name: 'Impact',
+    title: 'Make it personal',
+    body: 'Impact profiles translate national economic moves into your household reality: commute, rent, groceries and savings.',
   },
   {
-    eyebrow: 'Ask Mali',
-    title: 'Get plain-language answers.',
-    body: 'Ask why prices moved, what they mean, and what to watch next without reading through complicated reports.',
+    number: '03',
+    name: 'Ask Mali',
+    title: 'Plain-language answers',
+    body: 'Ask why prices moved, what it means for you, and what to watch next — without wading through complicated reports.',
   },
   {
-    eyebrow: 'Feed',
-    title: 'Stay ahead of every update.',
+    number: '04',
+    name: 'Feed',
+    title: 'Stay ahead of every update',
     body: 'Live stories, quick summaries and source links keep your economic picture current throughout the week.',
   },
 ];
 
-const screenStories = [
-  {
-    id: 'landing',
-    image: landingScreen,
-    title: 'A launch screen that already feels alive',
-    body: 'The first touchpoint sets the mood immediately: Kenya-first, cinematic, and unmistakably Mali.',
-    tone: 'lime',
-  },
-  {
-    id: 'signin',
-    image: signInScreen,
-    title: 'Fast entry, clean trust signals',
-    body: 'The sign-in experience carries the same visual language as the product, so the brand feels cohesive end to end.',
-    tone: 'glass',
-  },
-  {
-    id: 'home',
-    image: homeScreen,
-    title: 'Your economic dashboard',
-    body: 'Weekly pulse, key indicators and AI insight all sit above the fold so users can act quickly.',
-    tone: 'teal',
-  },
-  {
-    id: 'impact',
-    image: impactScreen,
-    title: 'See what pressure really means',
-    body: 'Impact Profiles and category breakdowns connect market changes to individual lifestyle choices and spending patterns.',
-    tone: 'amber',
-  },
-  {
-    id: 'feed',
-    image: feedScreen,
-    title: 'Follow the signal',
-    body: 'A readable feed surfaces major updates with source attribution and quick analysis links.',
-    tone: 'red',
-  },
-  {
-    id: 'ask-mali',
-    image: askMaliScreen,
-    title: 'Ask Mali anything',
-    body: 'The assistant breaks down the why behind price moves with plain language built for Kenyan users.',
-    tone: 'lime',
-  },
+const screens = [
+  { id: 'home', image: homeScreen, label: 'Home', title: 'Your economic dashboard', body: 'Weekly pulse, key indicators and AI insight — all above the fold.' },
+  { id: 'impact', image: impactScreen, label: 'Impact', title: 'What pressure really means', body: 'Category breakdowns connect market changes to your spending patterns.' },
+  { id: 'feed', image: feedScreen, label: 'Feed', title: 'Follow the signal', body: 'Major updates with source attribution and quick analysis links.' },
+  { id: 'ask', image: askMaliScreen, label: 'Ask Mali', title: 'Ask anything', body: 'The assistant explains the why behind price moves in plain language.' },
+  { id: 'landing', image: landingScreen, label: 'Welcome', title: 'A considered first impression', body: 'Kenya-first and unmistakably Mali from the very first screen.' },
+  { id: 'signin', image: signInScreen, label: 'Sign in', title: 'Fast, trusted entry', body: 'A cohesive visual language that carries through the whole product.' },
 ];
 
-const productPillars = [
-  'Live indicators for fuel, food, forex and inflation',
-  'Personalized impact views for budgets and routines',
-  'AI answers grounded in everyday Kenyan realities',
-  'Feed updates with readable summaries and source links',
+const stats = [
+  { value: '4+', label: 'Live indicator categories' },
+  { value: 'Real-time', label: 'Fuel, food & forex tracking' },
+  { value: 'AI-powered', label: 'Personal impact analysis' },
+  { value: 'Free', label: 'During beta — no card needed' },
 ];
 
-const androidInstallSteps = [
-  'Download the ZIP package to your Android device.',
-  'Unzip the file to reveal the Mali APK.',
-  'Open the APK and complete the Android install flow.',
+const steps = [
+  { title: 'Download the package', body: 'Get the ZIP package on your Android device using the button below.' },
+  { title: 'Unzip the file', body: 'Extract the archive to reveal the Mali APK inside.' },
+  { title: 'Install and open', body: 'Open the APK, complete the Android install flow, and you\u2019re in.' },
 ];
 
 const socials = [
-  {
-    label: 'Portfolio',
-    href: 'https://petermirithu.github.io/Portfolio/',
-    icon: 'globe',
-  },
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/peter-mirithu',
-    icon: 'linkedin',
-  },
-  {
-    label: 'GitHub',
-    href: 'https://github.com/petermirithu',
-    icon: 'github',
-  },
+  { label: 'Portfolio', href: 'https://petermirithu.github.io/Portfolio/' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/peter-mirithu' },
+  { label: 'GitHub', href: 'https://github.com/petermirithu' },
 ];
+
+function ArrowIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+      <path d="M2 8h11M9 3.5 13.5 8 9 12.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 function AndroidIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
       <path d="M7.2 8.4a5.9 5.9 0 0 1 9.6 0" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
       <path d="M7.5 9.8h9a2.5 2.5 0 0 1 2.5 2.5v4.6a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 16.9v-4.6a2.5 2.5 0 0 1 2.5-2.5Z" fill="currentColor" />
-      <circle cx="9.5" cy="14.2" r="0.9" fill="#0b0f14" />
-      <circle cx="14.5" cy="14.2" r="0.9" fill="#0b0f14" />
       <path d="M8.5 6.7 7.3 4.9M15.5 6.7l1.2-1.8" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   );
@@ -128,326 +84,270 @@ function AndroidIcon() {
 
 function AppleIcon() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">
       <path d="M15 4.1c-.7.8-1.2 1.9-1.1 3 .9.1 2-.4 2.6-1.2.7-.8 1.1-1.9 1-2.9-1 .1-2 .5-2.5 1.1Z" fill="currentColor" />
       <path d="M17.7 12.3c0-2 1.6-3 1.7-3.1-1-1.5-2.5-1.7-3-1.8-1.3-.1-2.5.8-3.2.8-.7 0-1.7-.8-2.8-.8-1.5 0-2.8.9-3.6 2.1-1.6 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.1 2.8 2.1 1.1 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.7-2.1.8-1.2 1.1-2.4 1.1-2.5-.1 0-2.8-1.1-2.8-3.3Z" fill="currentColor" />
     </svg>
   );
 }
 
-function GlobeIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M3.8 12h16.4M12 3.5c2.1 2.2 3.3 5.2 3.3 8.5S14.1 18.3 12 20.5M12 3.5c-2.1 2.2-3.3 5.2-3.3 8.5s1.2 6.3 3.3 8.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function LinkedInIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M6.3 8.1a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2ZM4.9 9.7h2.8V19H4.9V9.7Zm4.6 0h2.7V11h.1c.4-.7 1.3-1.6 2.8-1.6 3 0 3.5 1.9 3.5 4.4V19h-2.8v-4.6c0-1.1 0-2.5-1.6-2.5s-1.8 1.2-1.8 2.4V19H9.5V9.7Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function GitHubIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 3.6a8.6 8.6 0 0 0-2.7 16.8c.4.1.5-.2.5-.4v-1.6c-2.2.5-2.7-.9-2.7-.9-.3-.8-.8-1.1-.8-1.1-.7-.4.1-.4.1-.4.8.1 1.2.8 1.2.8.7 1.2 1.9.8 2.3.7.1-.5.3-.8.5-1-1.8-.2-3.8-.9-3.8-4 0-.9.3-1.6.8-2.2-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.3.8a7.9 7.9 0 0 1 4.2 0c1.6-1 2.3-.8 2.3-.8.5 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.2 0 3.2-1.9 3.9-3.8 4 .3.2.6.8.6 1.5V20c0 .2.1.5.5.4A8.6 8.6 0 0 0 12 3.6Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function SocialIcon({ name }) {
-  if (name === 'linkedin') return <LinkedInIcon />;
-  if (name === 'github') return <GitHubIcon />;
-  return <GlobeIcon />;
-}
-
-function AndroidButton({ className = '', children = 'Download for Android' }) {
-  return (
-    <a className={className} href={ANDROID_DOWNLOAD_URL} target="_blank" rel="noreferrer">
-      <span className="button-icon" aria-hidden="true"><AndroidIcon /></span>
-      {children}
-    </a>
-  );
-}
-
-function IosButton({ className = '', children = 'iOS Coming Soon' }) {
-  return (
-    <a className={`${className} button-ios-link`} href="#ios-availability">
-      <span className="button-icon" aria-hidden="true"><AppleIcon /></span>
-      {children}
-    </a>
-  );
-}
-
 export default function App() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <div className="site-shell">
-      <div className="site-backdrop" aria-hidden="true">
-        <div className="backdrop-orb backdrop-orb-1" />
-        <div className="backdrop-orb backdrop-orb-2" />
-        <div className="backdrop-grid" />
-        <div className="backdrop-rings" />
-      </div>
+    <div className="page">
+      <header className={`header ${scrolled ? 'header-scrolled' : ''}`}>
+        <div className="header-inner">
+          <a className="brand" href="#top" aria-label="Mali home" onClick={closeMenu}>
+            <img src={logo} alt="" />
+            <span>Mali</span>
+          </a>
 
-      <header className="site-header">
-        <a className="brand-mark" href="#top" aria-label="Mali home">
-          <img src={logo} alt="Mali logo" />
-          <div>
-            <strong>MALi</strong>
-            <span>Economic companion for Kenya</span>
+          <nav className={`nav ${menuOpen ? 'nav-open' : ''}`} aria-label="Primary">
+            <a href="#features" onClick={closeMenu}>Features</a>
+            <a href="#screens" onClick={closeMenu}>The app</a>
+            <a href="#why" onClick={closeMenu}>Why Mali</a>
+            <a href="#download" onClick={closeMenu}>Download</a>
+          </nav>
+
+          <div className="header-cta">
+            <a className="btn btn-primary btn-sm" href={ANDROID_DOWNLOAD_URL} target="_blank" rel="noreferrer">
+              Get the app <ArrowIcon />
+            </a>
+            <button
+              className="menu-toggle"
+              aria-label="Toggle navigation"
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((v) => !v)}
+            >
+              <span />
+              <span />
+            </button>
           </div>
-        </a>
-
-        <nav className="site-nav" aria-label="Primary">
-          <a href="#features">What it does</a>
-          <a href="#screens">Screens</a>
-          <a href="#intelligence">Why Mali</a>
-          <a href="#download">Where to get it</a>
-        </nav>
-
-        <div className="header-actions">
-          <IosButton className="button button-ios header-cta">iOS Coming Soon</IosButton>
-          <AndroidButton className="button button-ghost header-cta">
-            Android Download
-          </AndroidButton>
         </div>
       </header>
 
-      <main>
-        <section className="hero-section" id="top">
-          <div className="hero-copy">
-            <div className="hero-badge">
-              <span className="live-dot" />
-              <span>Now live. Built for Kenyan users, budgets and decisions.</span>
+      <main id="top">
+        {/* ============ HERO ============ */}
+        <section className="hero">
+          <div className="container hero-grid">
+            <div className="hero-copy">
+              <h1>
+                Economic clarity for everyday <em>Kenyan life.</em>
+              </h1>
+
+              <p className="lede">
+                Mali tracks fuel, food and forex in real time, then uses AI to explain
+                exactly how each change affects your wallet, your business and your plans.
+              </p>
+
+              <div className="hero-actions">
+                <a className="btn btn-primary" href={ANDROID_DOWNLOAD_URL} target="_blank" rel="noreferrer">
+                  <AndroidIcon /> Download for Android
+                </a>
+                <a className="btn btn-outline" href="#screens">
+                  Explore the app <ArrowIcon />
+                </a>
+              </div>
+
+              <p className="hero-note">Free during beta · No card required · iOS coming soon</p>
             </div>
-            
-            <h1>
-              Mali is live.
-              <span>Understand today. Plan for tomorrow.</span>
-            </h1>
 
-            <p className="hero-text">
-              Mali tracks fuel, food, forex in real time — then uses AI to explain exactly how these changes impact your wallet, business, and daily decisions.
-            </p>
+            <div className="hero-visual">
+              <div className="hero-frame hero-frame-back" aria-hidden="true">
+                <img src={homeScreen} alt="" loading="lazy" />
+              </div>
+              <div className="hero-frame hero-frame-front">
+                <img src={landingScreen} alt="Mali home screen with the weekly cost-of-living pulse and key indicators" />
+              </div>
+              <div className="hero-frame hero-frame-side" aria-hidden="true">
+                <img src={askMaliScreen} alt="" loading="lazy" />
+              </div>
+            </div>
+          </div>
+        </section>
 
-            <p className="hero-subtext">
-              Free during beta · No card required · Built in Nairobi 🇰🇪
-            </p>
+        {/* ============ STATS ============ */}
+        <section className="stats" aria-label="Product highlights">
+          <div className="container stats-grid">
+            {stats.map((s) => (
+              <div key={s.label} className="stat">
+                <strong>{s.value}</strong>
+                <span>{s.label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
 
-            <div className="hero-actions">
-              <AndroidButton className="button button-primary">Download for Android</AndroidButton>
-              <IosButton className="button button-ios">iOS Coming Soon</IosButton>
-              <a className="button button-secondary" href="#screens">Explore the app</a>
+        {/* ============ FEATURES ============ */}
+        <section className="section" id="features">
+          <div className="container">
+            <div className="section-head">
+              <p className="overline">What Mali does</p>
+              <h2>One product. Four ways to stay ahead.</h2>
+              <p className="section-sub">
+                Live market signals delivered through an interface that feels calm, useful
+                and grounded in how people actually make money decisions.
+              </p>
             </div>
 
-            <div className="hero-proof">
-              {productPillars.map((item) => (
-                <div key={item} className="proof-pill">{item}</div>
+            <div className="feature-grid">
+              {features.map((f) => (
+                <article key={f.name} className="feature">
+                  <div className="feature-top">
+                    <span className="feature-number">{f.number}</span>
+                    <span className="feature-name">{f.name}</span>
+                  </div>
+                  <h3>{f.title}</h3>
+                  <p>{f.body}</p>
+                </article>
               ))}
             </div>
           </div>
+        </section>
 
-          <div className="hero-visual" aria-label="App preview collage">
-            <div className="hero-glow" />
-            {heroScreens.map((screen) => (
-              <div key={screen.alt} className={screen.className}>
-                <img src={screen.image} alt={screen.alt} />
-              </div>
-            ))}
-            <div className="hero-caption-card">
-              <p>Weekly pulse</p>
-              <strong>See the signal before it becomes a surprise.</strong>
+        {/* ============ SCREENS ============ */}
+        <section className="section section-dark" id="screens">
+          <div className="container">
+            <div className="section-head">
+              <p className="overline">Inside the app</p>
+              <h2>Shown exactly the way it looks.</h2>
+              <p className="section-sub">
+                These aren’t mockups — they’re real screenshots of the product you’ll
+                download today.
+              </p>
+            </div>
+
+            <div className="screens-rail" role="list">
+              {screens.map((s) => (
+                <figure key={s.id} className="screen-card" role="listitem">
+                  <div className="screen-img">
+                    <img src={s.image} alt={s.title} loading="lazy" />
+                  </div>
+                  <figcaption>
+                    <span className="screen-label">{s.label}</span>
+                    <strong>{s.title}</strong>
+                    <p>{s.body}</p>
+                  </figcaption>
+                </figure>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="launch-strip" aria-label="Product highlights">
-          <div>
-            <span>Live app</span>
-            <strong>Real screenshots. Real product. Real economic context.</strong>
-          </div>
-          <div>
-            <span>Built around</span>
-            <strong>Fuel, forex, food, inflation, AI insight and personal impact.</strong>
-          </div>
-          <div>
-            <span>Availability</span>
-            <strong>Android download is live now. iOS is on the way.</strong>
-          </div>
-        </section>
-
-        <section className="section-block" id="features">
-          <div className="section-heading">
-            <p className="eyebrow">What the app does</p>
-            <h2>One product, multiple ways to stay ahead.</h2>
-            <p>
-              Mali combines live market signals with an interface that feels calm, useful and grounded in the way people
-              actually make money decisions day to day.
-            </p>
-          </div>
-
-          <div className="feature-grid">
-            {featureCards.map((feature) => (
-              <article key={feature.title} className="feature-card">
-                <p>{feature.eyebrow}</p>
-                <h3>{feature.title}</h3>
-                <span>{feature.body}</span>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="section-block screen-section" id="screens">
-          <div className="section-heading">
-            <p className="eyebrow">Inside Mali</p>
-            <h2>The app, shown the way it really looks.</h2>
-            <p>
-              The screenshots below are not placeholders. They show the actual launch experience visitors should expect once they download Mali.
-            </p>
-          </div>
-
-          <div className="screen-grid">
-            {screenStories.map((screen) => (
-              <article key={screen.id} className={`screen-card tone-${screen.tone}`}>
-                <div className="screen-copy">
-                  <p>{screen.id.replace('-', ' ')}</p>
-                  <h3>{screen.title}</h3>
-                  <span>{screen.body}</span>
-                </div>
-                <div className="screen-frame">
-                  <img src={screen.image} alt={screen.title} loading="lazy" />
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="section-block intelligence-section" id="intelligence">
-          <div className="intelligence-panel">
-            <div className="intelligence-copy">
-              <p className="eyebrow">Why Mali feels different</p>
-              <h2>The product speaks like a guide, not a spreadsheet.</h2>
-              <p>
-                The interface has strong data bones, but the experience stays human. Mali translates economic movement into
-                understandable guidance, which makes the app useful for fast daily decisions instead of just passive reading.
+        {/* ============ WHY ============ */}
+        <section className="section" id="why">
+          <div className="container why-grid">
+            <div className="why-copy">
+              <p className="overline">Why Mali feels different</p>
+              <h2>A guide, not a spreadsheet.</h2>
+              <p className="section-sub">
+                Mali has strong data bones, but the experience stays human. It translates
+                economic movement into understandable guidance — useful for fast daily
+                decisions, not just passive reading.
               </p>
 
-              <ul className="intelligence-list">
-                <li>Clean dark surfaces match the in-app experience and help the screenshots feel native to the page.</li>
-                <li>AI guidance is positioned as support, not noise, so the value proposition is clearer.</li>
-                <li>Navigation, cards and calls to action all now speak about a live product instead of a waitlist.</li>
-              </ul>
+              <a className="btn btn-primary" href={ANDROID_DOWNLOAD_URL} target="_blank" rel="noreferrer">
+                <AndroidIcon /> Try it today
+              </a>
             </div>
 
-            <div className="intelligence-stack">
-              <div className="stack-card stack-card-primary">
-                <span>01</span>
+            <ol className="why-list">
+              <li>
                 <strong>Understand what moved</strong>
-                <p>Track weekly changes and read the signal quickly.</p>
-              </div>
-              <div className="stack-card">
-                <span>02</span>
+                <p>Track weekly changes and read the signal quickly — fuel, forex, food and inflation in one glance.</p>
+              </li>
+              <li>
                 <strong>See your impact</strong>
                 <p>Connect macro shifts to transport, groceries, rent and household budgets.</p>
-              </div>
-              <div className="stack-card">
-                <span>03</span>
+              </li>
+              <li>
                 <strong>Act with clarity</strong>
-                <p>Use Ask Mali and the feed to decide what matters now and what can wait.</p>
-              </div>
-            </div>
+                <p>Use Ask Mali and the feed to decide what matters now — and what can wait.</p>
+              </li>
+            </ol>
           </div>
         </section>
 
-        <section className="section-block download-section" id="download">
-          <div className="download-panel">
-            <div className="download-copy">
-              <p className="eyebrow">Where to find the app</p>
-              <h2>Choose your platform.</h2>
-              <p>
-                Android users can download Mali right now. The current package is a ZIP file, so we show the install steps clearly before people start.
-              </p>
-            </div>
-
-            <div className="download-actions">
-              <AndroidButton className="button button-primary button-wide">Download Android ZIP</AndroidButton>
-              <IosButton className="button button-ios button-wide">iOS Coming Soon</IosButton>
-            </div>
-          </div>
-
-          <div className="platform-grid">
-            <article className="platform-card platform-card-android">
-              <div className="platform-copy">
-                <p className="eyebrow">Android</p>
-                <h3>Download, unzip, then install the APK.</h3>
-                <span>
-                  The Android package is hosted as a ZIP file. After downloading, unzip it on your phone and install the Mali APK from the extracted folder.
-                </span>
+        {/* ============ DOWNLOAD ============ */}
+        <section className="section section-download" id="download">
+          <div className="container">
+            <div className="download-panel">
+              <div className="download-head">
+                <p className="overline overline-light">Get Mali</p>
+                <h2>Three steps and you’re in.</h2>
+                <p className="section-sub">
+                  The Android package ships as a ZIP file. Here’s the simple install flow.
+                </p>
               </div>
 
-              <ol className="install-steps">
-                {androidInstallSteps.map((step) => (
-                  <li key={step}>{step}</li>
+              <ol className="steps">
+                {steps.map((step, i) => (
+                  <li key={step.title}>
+                    <span className="step-index">{i + 1}</span>
+                    <div>
+                      <strong>{step.title}</strong>
+                      <p>{step.body}</p>
+                    </div>
+                  </li>
                 ))}
               </ol>
 
-              <AndroidButton className="button button-primary button-wide">Get Mali for Android</AndroidButton>
-            </article>
-
-            <article className="platform-card platform-card-ios" id="ios-availability">
-              <div className="platform-copy">
-                <p className="eyebrow">iOS</p>
-                <h3>iPhone version is coming soon.</h3>
-                <span>
-                  For iPhone users, we working hard to release the app for you.
+              <div className="download-actions">
+                <a className="btn btn-light" href={ANDROID_DOWNLOAD_URL} target="_blank" rel="noreferrer">
+                  <AndroidIcon /> Download Android ZIP
+                </a>
+                <span className="ios-chip">
+                  <AppleIcon /> iOS coming soon
                 </span>
               </div>
-
-              <div className="coming-soon-note">
-                <strong>Coming soon</strong>
-                <p>We will add the App Store link here as soon as the iOS release is ready.</p>
-              </div>
-
-              <IosButton className="button button-ios button-wide">iOS Coming Soon</IosButton>
-            </article>
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="site-footer">
-        <div className="footer-brand">
-          <strong>Mali</strong>
-          <span>Economic intelligence for Kenya, now live.</span>
-          <p>Designed and built by Peter Mirithu for a product that feels as sharp as the app itself.</p>
-        </div>
-
-        <div className="footer-maker-card">
-          <p className="footer-label">Maker</p>
-          <strong>Peter Mirithu</strong>
-          <span>Software Engineer | AI/ML Engineer | Mobile App Developer</span>
-        </div>
-
-        <div className="footer-socials" aria-label="Social links">
-          {socials.map((social) => (
-            <a key={social.label} className="social-link" href={social.href} target="_blank" rel="noreferrer">
-              <span className="social-icon" aria-hidden="true"><SocialIcon name={social.icon} /></span>
-              <span>{social.label}</span>
+      <footer className="footer">
+        <div className="container footer-grid">
+          <div className="footer-brand">
+            <a className="brand" href="#top">
+              <img src={logo} alt="" />
+              <span>Mali</span>
             </a>
-          ))}
+            <p>Economic intelligence for Kenya, now live.</p>
+          </div>
+
+          <nav className="footer-nav" aria-label="Footer">
+            <a href="#features">Features</a>
+            <a href="#screens">The app</a>
+            <a href="#why">Why Mali</a>
+            <a href="#download">Download</a>
+          </nav>
+
+          <div className="footer-maker">
+            <p className="footer-label">Designed &amp; built by</p>
+            <strong>Peter Mirithu</strong>
+            <span>Software Engineer · AI/ML · Mobile</span>
+            <div className="footer-socials">
+              {socials.map((s) => (
+                <a key={s.label} href={s.href} target="_blank" rel="noreferrer">{s.label}</a>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="footer-meta">
+        <div className="container footer-meta">
           <span>© {new Date().getFullYear()} Mali. All rights reserved.</span>
-          <span>Website by Peter Mirithu.</span>
+          <span>Made in Nairobi 🇰🇪</span>
         </div>
       </footer>
     </div>
